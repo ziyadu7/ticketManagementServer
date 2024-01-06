@@ -2,7 +2,7 @@ const sequelize = require('../config/dbConfig')
 const { DataTypes } = require('sequelize');
 
 
-module.exports = sequelize.define('Tickets',{
+module.exports = sequelize.define('tickets',{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

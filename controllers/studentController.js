@@ -6,7 +6,6 @@ const studentRegister = async (req, res) => {
     try {
         const { name, password } = req.body
         const isRegistered = await studentModel.findOne({ name })
-        
         if(!isRegistered){
             await studentModel.create({name,password:sha256(password+process.env.SALT)})
             res.status(200).json({message:"Student registered successfully"})

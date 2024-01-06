@@ -1,7 +1,7 @@
 const sequelize = require('../config/dbConfig')
 const { DataTypes } = require('sequelize');
 
-module.exports = sequelize.define('Student', {
+module.exports = sequelize.define('student', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -14,5 +14,9 @@ module.exports = sequelize.define('Student', {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    isAccepted:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
     }
 })
