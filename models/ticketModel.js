@@ -19,7 +19,7 @@ module.exports = sequelize.define('Tickets',{
         type: DataTypes.STRING,
         allowNull: false,
         references:{
-            model:'Student',
+            model:'Teacher',
             key:'id'
         }
     },
