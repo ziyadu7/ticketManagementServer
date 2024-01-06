@@ -1,17 +1,18 @@
-const Sequelize = require('sequelize')
+const sequelize = require('../config/dbConfig')
+const { DataTypes } = require('sequelize');
 
-module.exports = Sequelize.define('Admin',{
+module.exports = sequelize.define('Admin',{
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
     name: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     password: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     }
 })

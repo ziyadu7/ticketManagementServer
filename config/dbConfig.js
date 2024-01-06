@@ -1,4 +1,5 @@
 const { Client } = require('pg')
+const { Sequelize } = require('sequelize');
 require('dotenv').config()
 
     const client = new Client({
@@ -28,4 +29,17 @@ require('dotenv').config()
       client.end();
     });
 
-    module.exports = client
+    const sequelize = new Sequelize({
+      dialect: 'postgres',
+      dialectModule: require('pg'), // Specify the pg module for the dialect
+      database: process.env.DBNAME,
+      username: process.env.DBUSER,
+      password: process.env.DBPASSWORD,
+      host: process.env.DBHOST,
+      port: process.env.DBPORT,
+      define: {
+          timestamps: false, // Example configuration, you can adjust this
+      }
+  });
+
+    module.exports = sequelize

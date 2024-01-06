@@ -1,12 +1,14 @@
-const Sequelize = require('sequelize')
+const sequelize = require('../config/dbConfig')
+const { DataTypes } = require('sequelize');
 
-module.exports = Sequelize.define('Tickets',{
+
+module.exports = sequelize.define('Tickets',{
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
     },
     requestedBy: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         references:{
             model:'Student',
@@ -14,7 +16,7 @@ module.exports = Sequelize.define('Tickets',{
         }
     },
     assignee: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         references:{
             model:'Student',
@@ -22,19 +24,19 @@ module.exports = Sequelize.define('Tickets',{
         }
     },
     priority:{
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     status:{
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     createdDate:{
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
     },
     dueDate:{
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
     }
 })
