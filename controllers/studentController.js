@@ -5,9 +5,10 @@ require('dotenv').config()
 const studentRegister = async (req, res) => {
     try {
         const { name, password } = req.body
-        const isRegistered = await studentModel.findOne({ name })
+        const isRegistered = await studentModel.findOne({ where: { name: name } });
+        console.log(isRegistered);
         if(!isRegistered){
-            await studentModel.create({name,password:sha256(password+process.env.SALT)})
+            await studentModel.create({name,password:sha256(password+process.env.SALT),isAccepted:false})
             res.status(200).json({message:"Student registered successfully"})
         }else{
             res.status(409).json({errMsg:"Student already registered"})

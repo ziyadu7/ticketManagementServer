@@ -17,6 +17,6 @@ module.exports = sequelize.define('student', {
     },
     isAccepted:{
         type:DataTypes.BOOLEAN,
-        defaultValue:false
+        allowNull: false,
     }
 })
