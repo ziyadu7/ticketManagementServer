@@ -22,8 +22,18 @@ const login = async (req,res)=>{
 const getStudents = async (req,res)=>{
     try {
         const students = await studentModel.findAll({})
-        console.log(students);
         res.status(200).json({students})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
+const acceptStudent = async (req,res)=>{
+    try {
+        const {studentId} = req.body
+         await studentModel.update({ isAccepted: true }, { where: { id: studentId } })
+        res.status(200).json({message:"Accepted student"})
     } catch (error) {
         console.log(error);
         res.status(500).json({ errMsg: "Server Error" })
@@ -34,5 +44,6 @@ const getStudents = async (req,res)=>{
 
 module.exports = {
     login,
-    getStudents
+    getStudents,
+    acceptStudent
 }
