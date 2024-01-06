@@ -1,5 +1,6 @@
 const { generateToken } = require('../middlewares/auth');
-const adminModel = require('../models/adminModel')
+const adminModel = require('../models/adminModel');
+const studentModel = require('../models/studentModel');
 
 const login = async (req,res)=>{
     try {
@@ -18,6 +19,20 @@ const login = async (req,res)=>{
     }
 }
 
+const getStudents = async (req,res)=>{
+    try {
+        const students = await studentModel.findAll({})
+        console.log(students);
+        res.status(200).json({students})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
+
+
 module.exports = {
-    login
+    login,
+    getStudents
 }
