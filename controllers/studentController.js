@@ -1,12 +1,17 @@
 const studentModel = require('../models/studentModel')
 
-const studentRegister = async (req,res)=>{
+const studentRegister = async (req, res) => {
     try {
-        const {name,password} = req.body
-        const isRegistered = await studentModel.findOne({name})
-        console.log(isRegistered);
+        const { name, password } = req.body
+        console.log(name, password);
+        const isRegistered = await studentModel.findOne({ name })
+        
+        if(!isRegistered){
+            
+        }
     } catch (error) {
-        res.status(500).json({errMsg:"Server Error"})
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
     }
 }
 
