@@ -1,8 +1,8 @@
-const {studentValidationSchema } = require('../helpers/validationSchema')
+const {loginValidationSchema } = require('../helpers/validationSchema')
 
-const studentValidation = async (req,res,next)=>{
+const loginValidation = async (req,res,next)=>{
     try {
-        await studentValidationSchema.validateAsync(req.body)
+        await loginValidationSchema.validateAsync(req.body)
         next()
     } catch (error) {
         if(error.isJoi === true){
@@ -14,5 +14,5 @@ const studentValidation = async (req,res,next)=>{
 }
 
 module.exports = {
-    studentValidation
+    loginValidation
 }
