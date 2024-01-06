@@ -1,3 +1,4 @@
+const { generateToken } = require('../middlewares/auth')
 const studentModel = require('../models/studentModel')
 const sha256 = require('js-sha256')
 require('dotenv').config()
@@ -19,6 +20,24 @@ const studentRegister = async (req, res) => {
     }
 }
 
+const studentLogin = async (req,res)=>{
+    try {
+        const { name, password } = req.body
+        const isRegistered = await studentModel.findOne({ where: { name: name,password:sha256(password+process.env.SALT) } });
+        
+        if(isRegistered){
+            const token = generateToken({id:isRegistered.id,role:'student'})
+            res.status(200).json({token,name:isRegistered.name,role:'student'})
+        }else{
+            res.status(400).json({errMsg:"User not registered with the name and password"})
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
 module.exports = {
-    studentRegister
+    studentRegister,
+    studentLogin
 }
