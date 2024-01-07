@@ -25,7 +25,6 @@ module.exports = sequelize.define('ticket',{
     },
     subject:{
         type: DataTypes.INTEGER,
-        allowNull: false,
         references:{
             model:'subjects',
             key:'id'
