@@ -13,8 +13,7 @@ const addSubjectValidationSchema = Joi.object({
 const addTicketValidationSchema = Joi.object({
     subject:Joi.number().required(),
     assignee:Joi.number().required(),
-    desctiption:Joi.string().required(),
-    dueDate:Joi.date().required()
+    desctiption:Joi.string().required()
 })
 
 module.exports = {

@@ -2,6 +2,7 @@ const { generateToken } = require('../middlewares/auth')
 const adminModel = require('../models/adminModel')
 const studentModel = require('../models/studentModel')
 const sha256 = require('js-sha256')
+const ticketModel = require('../models/ticketModel')
 require('dotenv').config()
 
 const studentRegister = async (req, res) => {
@@ -54,7 +55,12 @@ const fetchAdmins = async (req,res)=>{
 
 const addTicket = async (req,res)=>{
     try {
-        
+        const {description,subject,assignee} = req.body
+        const studentId = req?.payload?.id
+        const createdDate = new Date()
+
+        await ticketModel.create({requiestedBy:studentId,description,subject,assignee,status:'Pending',createdDate})
+        res.status(200).json({message:'Ticket addedd successfully'})
     } catch (error) {
         console.log(error);
         res.status(500).json({ errMsg: "Server Error" })
@@ -64,5 +70,6 @@ const addTicket = async (req,res)=>{
 module.exports = {
     studentRegister,
     studentLogin,
-    fetchAdmins
+    fetchAdmins,
+    addTicket
 }

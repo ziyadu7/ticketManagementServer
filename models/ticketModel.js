@@ -8,7 +8,7 @@ module.exports = sequelize.define('tickets',{
         primaryKey: true,
     },
     requestedBy: {
-        type: DataTypes.STRING,
+        type: DataTypes.NUMBER,
         allowNull: false,
         references:{
             model:'student',
@@ -16,7 +16,7 @@ module.exports = sequelize.define('tickets',{
         }
     },
     assignee: {
-        type: DataTypes.STRING,
+        type: DataTypes.NUMBER,
         allowNull: false,
         references:{
             model:'admin',
@@ -24,7 +24,7 @@ module.exports = sequelize.define('tickets',{
         }
     },
     subject:{
-        type: DataTypes.STRING,
+        type: DataTypes.NUMBER,
         allowNull: false,
         references:{
             model:'subject',

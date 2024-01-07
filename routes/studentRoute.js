@@ -9,5 +9,6 @@ router.post('/register',validation.loginValidation,studentController.studentRegi
 router.post('/login',validation.loginValidation,studentController.studentLogin)
 router.get('/fetchAdmins',auth.verifyStudentToken,studentController.fetchAdmins)
 router.get('/getSubjects',auth.verifyStudentToken,commonController.getSubjects)
+router.post('/addTicket',auth.verifyStudentToken,validation.addTicketValidation,studentController.addTicket)
 
 module.exports = router
