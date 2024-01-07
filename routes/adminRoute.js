@@ -10,5 +10,6 @@ router.get('/getStudents',auth.verifyAdminToken,adminController.getStudents)
 router.patch('/acceptStudent',auth.verifyAdminToken,adminController.acceptStudent)
 router.post('/addSubject',auth.verifyAdminToken,validation.addSubjectValidation,adminController.addSubject)
 router.get('/getSubjects',auth.verifyAdminToken,commonController.getSubjects)
+router.get('/getTickets',auth.verifyAdminToken,adminController.getTickets)
 
 module.exports = router
