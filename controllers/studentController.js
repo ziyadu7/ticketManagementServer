@@ -1,4 +1,5 @@
 const { generateToken } = require('../middlewares/auth')
+const adminModel = require('../models/adminModel')
 const studentModel = require('../models/studentModel')
 const sha256 = require('js-sha256')
 require('dotenv').config()
@@ -41,7 +42,18 @@ const studentLogin = async (req,res)=>{
     }
 }
 
+const fetchAdmins = async (req,res)=>{
+    try {
+        const admins = await adminModel.findAll()
+        res.status(200).json({admins})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
 module.exports = {
     studentRegister,
-    studentLogin
+    studentLogin,
+    fetchAdmins
 }
