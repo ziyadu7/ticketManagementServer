@@ -1,34 +1,14 @@
 const sequelize = require('../config/dbConfig')
 const { DataTypes } = require('sequelize');
+const student = require('./studentModel')
+const admin = require('./adminModel')
+const subject = require('./subjectModel')
 
-module.exports = sequelize.define('ticket',{
+const Ticket = sequelize.define('ticket',{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    },
-    requestedBy: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references:{
-            model:'students',
-            key:'id'
-        }
-    },
-    assignee: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references:{
-            model:'admins',
-            key:'id'
-        }
-    },
-    subject:{
-        type: DataTypes.INTEGER,
-        references:{
-            model:'subjects',
-            key:'id'
-        }
     },
     status:{
         type: DataTypes.STRING,
@@ -42,3 +22,9 @@ module.exports = sequelize.define('ticket',{
         type: DataTypes.DATE
     }
 })
+
+Ticket.belongsTo(student, { foreignKey: 'requestedBy', as: 'requestedByStudent' });
+Ticket.belongsTo(admin, { foreignKey: 'assignee', as: 'assigneeAdmin' });
+Ticket.belongsTo(subject, { foreignKey: 'subject', as: 'ticketSubject' });
+
+module.exports = Ticket
