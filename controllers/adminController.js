@@ -77,7 +77,9 @@ const updateStatus = async (req,res)=>{
         let {ticketId} = req.params
         const {status} = req.body
         ticketId = ticketId.slice(1,ticketId.length)
-        await ticketModel.update({status},{where:{id:ticketId}})
+        const dueDate = new Date()
+        const date = dueDate.toLocaleDateString()
+        await ticketModel.update({status,dueDate:date},{where:{id:ticketId}})
         res.status(200).json({message:'Status changed successfully'})
 
     } catch (error) {
