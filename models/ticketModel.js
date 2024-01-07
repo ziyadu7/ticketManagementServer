@@ -1,33 +1,33 @@
 const sequelize = require('../config/dbConfig')
 const { DataTypes } = require('sequelize');
 
-
-module.exports = sequelize.define('tickets',{
+module.exports = sequelize.define('ticket',{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
     requestedBy: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references:{
-            model:'student',
+            model:'students',
             key:'id'
         }
     },
     assignee: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references:{
-            model:'admin',
+            model:'admins',
             key:'id'
         }
     },
     subject:{
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references:{
-            model:'subject',
+            model:'subjects',
             key:'id'
         }
     },
@@ -40,7 +40,6 @@ module.exports = sequelize.define('tickets',{
         allowNull: false,
     },
     dueDate:{
-        type: DataTypes.DATE,
-        allowNull: false,
+        type: DataTypes.DATE
     }
 })
