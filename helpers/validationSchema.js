@@ -10,7 +10,15 @@ const addSubjectValidationSchema = Joi.object({
     priority:Joi.string().valid('high', 'medium', 'low').required()
 })
 
+const addTicketValidationSchema = Joi.object({
+    subject:Joi.number().required(),
+    assignee:Joi.number().required(),
+    desctiption:Joi.string().required(),
+    dueDate:Joi.date().required()
+})
+
 module.exports = {
     loginValidationSchema,
-    addSubjectValidationSchema
+    addSubjectValidationSchema,
+    addTicketValidationSchema
 }

@@ -52,6 +52,15 @@ const fetchAdmins = async (req,res)=>{
     }
 }
 
+const addTicket = async (req,res)=>{
+    try {
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
 module.exports = {
     studentRegister,
     studentLogin,
