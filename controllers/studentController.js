@@ -60,10 +60,11 @@ const addTicket = async (req, res) => {
         const { description, subject, assignee } = req.body
         const studentId = req?.payload?.id
         const createdDate = new Date()
+        const date = createdDate.toLocaleDateString()
         if (subject == 0) {
-            await ticketModel.create({ requestedBy: studentId, description, assignee, status: 'Pending', createdDate: createdDate.toDateString() })
+            await ticketModel.create({ requestedBy: studentId, description, assignee, status: 'Pending', createdDate: date })
         } else {
-            await ticketModel.create({ requestedBy: studentId, description, subject, assignee, status: 'Pending', createdDate: createdDate.toDateString() })
+            await ticketModel.create({ requestedBy: studentId, description, subject, assignee, status: 'Pending', createdDate: date })
         }
         res.status(200).json({ message: 'Ticket addedd successfully' })
     } catch (error) {

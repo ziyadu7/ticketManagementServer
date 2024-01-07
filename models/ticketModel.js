@@ -4,21 +4,25 @@ const student = require('./studentModel')
 const admin = require('./adminModel')
 const subject = require('./subjectModel')
 
-const Ticket = sequelize.define('ticket',{
+const Ticket = sequelize.define('ticket', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    status:{
+    status: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    createdDate:{
+    createdDate: {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    dueDate:{
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    dueDate: {
         type: DataTypes.DATE
     }
 })
