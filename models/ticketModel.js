@@ -11,7 +11,7 @@ module.exports = sequelize.define('tickets',{
         type: DataTypes.STRING,
         allowNull: false,
         references:{
-            model:'Student',
+            model:'student',
             key:'id'
         }
     },
@@ -19,13 +19,17 @@ module.exports = sequelize.define('tickets',{
         type: DataTypes.STRING,
         allowNull: false,
         references:{
-            model:'Teacher',
+            model:'admin',
             key:'id'
         }
     },
-    priority:{
+    subject:{
         type: DataTypes.STRING,
         allowNull: false,
+        references:{
+            model:'subject',
+            key:'id'
+        }
     },
     status:{
         type: DataTypes.STRING,

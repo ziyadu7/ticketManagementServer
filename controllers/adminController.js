@@ -1,6 +1,7 @@
 const { generateToken } = require('../middlewares/auth');
 const adminModel = require('../models/adminModel');
 const studentModel = require('../models/studentModel');
+const subjectModel = require('../models/subjectModel');
 
 const login = async (req,res)=>{
     try {
@@ -40,10 +41,22 @@ const acceptStudent = async (req,res)=>{
     }
 }
 
+const addSubject = async (req,res)=>{
+    try {
+        const {subject,priority} = req.body
+        await subjectModel.create({subject,priority})
+        res.status(200).json({message:"Subject added successfully"})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
 
 
 module.exports = {
     login,
     getStudents,
-    acceptStudent
+    acceptStudent,
+    addSubject
 }

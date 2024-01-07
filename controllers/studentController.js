@@ -26,8 +26,12 @@ const studentLogin = async (req,res)=>{
         const isRegistered = await studentModel.findOne({ where: { name: name,password:sha256(password+process.env.SALT) } });
         
         if(isRegistered){
-            const token = generateToken({id:isRegistered.id,role:'student'})
-            res.status(200).json({token,name:isRegistered.name,role:'student'})
+            if(!isRegistered.isAccepted){
+                return res.status(403).json({errMsg:"Admins not accepted you"})
+            }else{
+                const token = generateToken({id:isRegistered.id,role:'student'})
+                res.status(200).json({token,name:isRegistered.name,role:'student'})
+            }
         }else{
             res.status(400).json({errMsg:"User not registered with the name and password"})
         }
