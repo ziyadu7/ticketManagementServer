@@ -72,6 +72,20 @@ const getTickets = async (req, res) => {
     }
 }
 
+const updateStatus = async (req,res)=>{
+    try {
+        let {ticketId} = req.params
+        const {status} = req.body
+        ticketId = ticketId.slice(1,ticketId.length)
+        await ticketModel.update({status},{where:{id:ticketId}})
+        res.status(200).json({message:'Status changed successfully'})
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
 
 
 module.exports = {
@@ -79,5 +93,6 @@ module.exports = {
     getStudents,
     acceptStudent,
     addSubject,
-    getTickets
+    getTickets,
+    updateStatus
 }
