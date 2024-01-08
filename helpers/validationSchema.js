@@ -17,7 +17,8 @@ const addTicketValidationSchema = Joi.object({
 })
 
 const commentValidationSchema = Joi.object({
-    comment:Joi.string().required()
+    comment:Joi.string().required(),
+    ticketId:Joi.number().required()
 })
 
 module.exports = {

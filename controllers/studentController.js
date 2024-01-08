@@ -92,11 +92,11 @@ const fetchTickets = async (req, res) => {
 
 const addComment = async(req,res)=>{
     try {
-        const {comment} = req.body
+        const {comment,ticketId} = req.body
         const {id} = req.payload
         const date = new Date().toLocaleDateString()
 
-        await commentModel.create({date,comment,commentBy:id})
+        await commentModel.create({date,comment,commentedBy:id,commentOf:ticketId})
         res.status(200).json({message:'comment added successfully'})
 
     } catch (error) {
