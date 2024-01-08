@@ -2,7 +2,7 @@ const sequelize = require('../config/dbConfig')
 const { DataTypes } = require('sequelize');
 const student = require('./studentModel')
 
-const Ticket = sequelize.define('ticket', {
+const Comment = sequelize.define('comment', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -18,6 +18,6 @@ const Ticket = sequelize.define('ticket', {
     }
 })
 
-Ticket.belongsTo(student, { foreignKey: 'commentedBy', as: 'commentedByStudent' });
+Comment.belongsTo(student, { foreignKey: 'commentedBy', as: 'commentedByStudent' });
 
-module.exports = Ticket
+module.exports = Comment

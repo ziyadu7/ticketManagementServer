@@ -1,4 +1,4 @@
-const {loginValidationSchema, addSubjectValidationSchema,addTicketValidationSchema } = require('../helpers/validationSchema')
+const {loginValidationSchema, addSubjectValidationSchema,addTicketValidationSchema,commentValidationSchema } = require('../helpers/validationSchema')
 
 const loginValidation = async (req,res,next)=>{
     try {
@@ -39,8 +39,22 @@ const addTicketValidation = async (req,res,next)=>{
     }
 }
 
+const addCommentValidation = async (req,res,next)=>{
+    try {
+        await commentValidationSchema.validateAsync(req.body)
+        next()
+    } catch (error) {
+        if(error.isJoi === true){
+            error.status = 422
+            res.status(422).json({errMsg:error.message})
+        }
+        console.log(error.message);
+    }
+}
+
 module.exports = {
     loginValidation,
     addSubjectValidation,
-    addTicketValidation
+    addTicketValidation,
+    addCommentValidation
 }

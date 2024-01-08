@@ -4,6 +4,7 @@ const studentModel = require('../models/studentModel')
 const sha256 = require('js-sha256')
 const ticketModel = require('../models/ticketModel')
 const subjectModel = require('../models/subjectModel')
+const commentModel = require('../models/commentModel')
 
 require('dotenv').config()
 
@@ -89,10 +90,26 @@ const fetchTickets = async (req, res) => {
     }
 }
 
+const addComment = async(req,res)=>{
+    try {
+        const {comment} = req.body
+        const {id} = req.payload
+        const date = new Date().toLocaleDateString()
+
+        await commentModel.create({date,comment,commentBy:id})
+        res.status(200).json({message:'comment added successfully'})
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
 module.exports = {
     studentRegister,
     studentLogin,
     fetchAdmins,
     addTicket,
-    fetchTickets
+    fetchTickets,
+    addComment
 }
