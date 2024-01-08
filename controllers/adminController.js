@@ -55,32 +55,52 @@ const addSubject = async (req, res) => {
 
 const getTickets = async (req, res) => {
     try {
-        const {id} = req.payload
+        const { id } = req.payload
         const tickets = await ticketModel.findAll({
             where: { assignee: id },
             include: [
                 { model: studentModel, as: 'requestedByStudent', attributes: ['id', 'name'] },
                 { model: adminModel, as: 'assigneeAdmin', attributes: ['id', 'name'] },
-                { model: subjectModel, as: 'ticketSubject', attributes: ['id', 'subject','priority'] },
+                { model: subjectModel, as: 'ticketSubject', attributes: ['id', 'subject', 'priority'] },
             ],
         })
-        
-        res.status(200).json({tickets})
+
+        res.status(200).json({ tickets })
     } catch (error) {
         console.log(error);
         res.status(500).json({ errMsg: "Server Error" })
     }
 }
 
-const updateStatus = async (req,res)=>{
+const updateStatus = async (req, res) => {
     try {
-        let {ticketId} = req.params
-        const {status} = req.body
-        ticketId = ticketId.slice(1,ticketId.length)
+        let { ticketId } = req.params
+        const { status } = req.body
+        ticketId = ticketId.slice(1, ticketId.length)
         const dueDate = new Date()
         const date = dueDate.toLocaleDateString()
-        await ticketModel.update({status,dueDate:date},{where:{id:ticketId}})
-        res.status(200).json({message:'Status changed successfully'})
+        await ticketModel.update({ status, dueDate: date }, { where: { id: ticketId } })
+        res.status(200).json({ message: 'Status changed successfully' })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
+const deleteSubject = async (req, res) => {
+    try {
+        let { subjectId } = req.params
+        subjectId = subjectId.slice(1, subjectId.length)
+
+        const tickets = await ticketModel.findAll({ where: { subject: subjectId } })
+        if (tickets.length > 0) {
+            return res.status(409).json({ errMsg: "The subject is in use" })
+        } else {
+            await subjectModel.destroy({ where: { id: subjectId } })
+            return res.status(200).json({ message: 'subject deleted successfully' })
+        }
+
 
     } catch (error) {
         console.log(error);
@@ -96,5 +116,6 @@ module.exports = {
     acceptStudent,
     addSubject,
     getTickets,
-    updateStatus
+    updateStatus,
+    deleteSubject
 }

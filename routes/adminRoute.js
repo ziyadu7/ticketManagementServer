@@ -12,5 +12,6 @@ router.post('/addSubject',auth.verifyAdminToken,validation.addSubjectValidation,
 router.get('/getSubjects',auth.verifyAdminToken,commonController.getSubjects)
 router.get('/getTickets',auth.verifyAdminToken,adminController.getTickets)
 router.put('/updateStatus/:ticketId',auth.verifyAdminToken,adminController.updateStatus)
+router.delete('/deleteSubject/:subjectId',auth.verifyAdminToken,adminController.deleteSubject)
 
 module.exports = router
