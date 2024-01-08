@@ -1,4 +1,5 @@
 const subjectModel = require("../models/subjectModel");
+const commentModel = require('../models/commentModel')
 
 const getSubjects = async (req,res)=>{
     try {
