@@ -10,6 +10,17 @@ const getSubjects = async (req,res)=>{
     }
 }
 
+const fetchComments = async (req,res)=>{
+    try {
+        const comments = await commentModel.findAll()
+        res.status(200).json({comments})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
 module.exports = {
-    getSubjects
+    getSubjects,
+    fetchComments
 }
