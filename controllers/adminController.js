@@ -11,7 +11,7 @@ const login = async (req, res) => {
 
         if (isAdmin) {
             const token = generateToken({ id: isAdmin.id, role: 'admin' })
-            res.status(200).json({ token, name: isAdmin.name, role: 'admin' })
+            res.status(200).json({ token, name: isAdmin.name, role: 'admin',isSuper:isAdmin.isSuper })
         } else {
             res.status(400).json({ errMsg: "You are not an admin or password is wrong" })
         }
@@ -56,7 +56,7 @@ const addSubject = async (req, res) => {
 const addAdmin = async (req, res) => {
     try {
         const { name,password,isSuper } = req.body
-        await adminModel.create({name,password,isSuper })
+        await adminModel.create({name,password,isSuper})
         res.status(200).json({ message: "Admin added successfully" })
     } catch (error) {
         console.log(error);

@@ -5,6 +5,12 @@ const loginValidationSchema = Joi.object({
     password:Joi.string().required().regex(/^[a-zA-Z0-9]{3,30}$/)
 })
 
+const addAdminValiadtionSchema = Joi.object({
+    name:Joi.string().required(),
+    password:Joi.string().required(),
+    isSuper:Joi.boolean().required()
+})
+
 const addSubjectValidationSchema = Joi.object({
     subject:Joi.string().required(),
     priority:Joi.string().valid('high', 'medium', 'low').required()
@@ -25,5 +31,6 @@ module.exports = {
     loginValidationSchema,
     addSubjectValidationSchema,
     addTicketValidationSchema,
-    commentValidationSchema
+    commentValidationSchema,
+    addAdminValiadtionSchema
 }
