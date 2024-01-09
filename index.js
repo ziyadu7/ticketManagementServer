@@ -3,6 +3,8 @@ const sequelize = require('./config/dbConfig')
 const studentRouter = require('./routes/studentRoute')
 const adminRouter = require('./routes/adminRoute')
 const cors = require('cors')
+require('dotenv').config()
+
 sequelize
 sequelize.sync()
     .then(() => {
@@ -13,7 +15,10 @@ sequelize.sync()
     });
 const app = express()
 
-app.use(cors('*'))
+app.use(cors({
+    origin:process.env.FRONTENDURL ,
+    credentials: true,
+  }))
 app.use(express.json())
 
 app.use('/', studentRouter)
