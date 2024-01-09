@@ -9,7 +9,7 @@ This repository contains a ticket management system designed specifically for co
 - **Admin Registration and Approval**
   - Upon user registration, admin approval is required to grant access.
 - **Super Admin Privileges**
-  - A built-in super admin has the authority to add, manage, and control other admin accounts.
+  - A built-in super admin has the authority to add other admin accounts.
 - **Ticket Assignment**
   - Admins can manage tickets assigned specifically to them.
 - **Subject and Priority Management**
@@ -28,16 +28,15 @@ This repository contains a ticket management system designed specifically for co
 
 1. **Registration and Approval**
    - Admins:
-     - Request access through the registration system.
-     - Await approval from the super admin to gain login access.
+     - Super admin will add admins with name and password.
+     - Admins can join with the name and password that given by super admin.
 
 2. **Ticket Management**
    - View and manage tickets assigned specifically to each admin account.
-   - Add subjects to tickets along with assigned priorities.
+   - Add subjects for the tickets along with assigned priorities.
 
 3. **Super Admin Privileges**
-   - Manage other admin accounts.
-   - Control access and permissions for all admins.
+   - Can add other admins.
 
 ### Student Actions
 
@@ -50,21 +49,18 @@ This repository contains a ticket management system designed specifically for co
 
 ## Installation
 
-- Instructions for setting up the ticket management system locally or deploying it to a server.
+```bash
+$ npm install
+```
+
+## Running the app
+
+```bash
+# development
+$ npm start
+
+```
 
 ## Technologies Used
 
-- List of technologies, frameworks, and languages used to build the system.
-
-## Contributions
-
-- Guidelines for contributing to the project, if applicable.
-- Information on how to report issues or suggest improvements.
-
-## License
-
-- Details about the license under which the project is distributed.
-
-## Support
-
-- Contact information or resources for support or further inquiries.
+- PostgreSQL, Node.js, Express.js, Joi for validation, jwt for authentication, React.js, Redux
