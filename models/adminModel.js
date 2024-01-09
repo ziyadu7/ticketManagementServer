@@ -14,5 +14,9 @@ module.exports = sequelize.define('admin',{
     password: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    isSuper: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
     }
 })

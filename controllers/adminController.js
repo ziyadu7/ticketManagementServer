@@ -53,6 +53,17 @@ const addSubject = async (req, res) => {
     }
 }
 
+const addAdmin = async (req, res) => {
+    try {
+        const { name,password,isSuper } = req.body
+        await adminModel.create({name,password,isSuper })
+        res.status(200).json({ message: "Admin added successfully" })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ errMsg: "Server Error" })
+    }
+}
+
 const getTickets = async (req, res) => {
     try {
         const { id } = req.payload
@@ -117,5 +128,6 @@ module.exports = {
     addSubject,
     getTickets,
     updateStatus,
-    deleteSubject
+    deleteSubject,
+    addAdmin
 }
