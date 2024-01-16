@@ -5,7 +5,6 @@ const adminRouter = require('./routes/adminRoute')
 const cors = require('cors')
 require('dotenv').config()
 
-sequelize
 sequelize.sync()
     .then(() => {
         console.log('All models synced successfully');
